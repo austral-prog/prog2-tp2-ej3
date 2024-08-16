@@ -1,11 +1,14 @@
 package com.template;
 
+import java.util.Collections;
+import java.util.Map;
+
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
+
+
+    public static Map<String, Integer> deposit(Map<String, Integer> accounts, String account, int amount) {
+        return Collections.emptyMap();
     }
 
-    public int add(int a, int b) {
-        return a + b;
-    }
+
 }

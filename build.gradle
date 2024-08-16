@@ -35,4 +35,20 @@ test {
         html.required.set(true) // HTML report
         junitXml.required.set(true) // XML report
     }
+
+    doLast {
+        def testPath = "${project.getProjectDir()}/build/test-results/test/TEST-com.template.AppTest.xml"
+        println "Test report file: ${testPath}"
+        def testReportFile = file(testPath)
+        if (testReportFile.exists()) {
+            def xmlParser = new XmlParser()
+            def testSuite = xmlParser.parse(testReportFile)
+            def testCount = testSuite.'@tests'.toInteger()
+            if (testCount < 10) {
+                throw new GradleException("At least 10 tests are required. Only ${testCount} tests were found.")
+            }
+        } else {
+            throw new GradleException("Test report file not found.")
+        }
+    }
 }
